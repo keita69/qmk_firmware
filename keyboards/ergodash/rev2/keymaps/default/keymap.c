@@ -31,8 +31,8 @@ enum custom_keycodes {
 #define CTL_W LCTL(KC_W)           // Crrl+W
 #define CTLTAB LCTL(KC_TAB)        // Crrl+TAB
 #define CTLSTB LCTL(LSFT(KC_TAB))  // Crrl+Shift+TAB
-#define ALTTAB LALT(KC_TAB)        // Alt+TAB
-#define ALTSTB LALT(LSFT(KC_TAB))  // Alt+Shift+TAB
+#define ALTTAB MT(MOD_LALT, KC_TAB)        // Alt+TAB
+#define ALTSTB MT(MOD_LALT, LSFT(KC_TAB))  // Alt+Shift+TAB
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       _______, _______, _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______, _______, _______, \
       _______, RESET  , RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, _______,                       _______, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, _______, \
-      _______, _______, BL_TOGG, BL_BRTG, BL_INC , BL_DEC , _______,                       _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN4, KC_BTN5, \
+      _______, _______, BL_TOGG, BL_BRTG, BL_INC , BL_DEC , _______,                       _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_BTN4, KC_BTN5, \
       _______, _______, _______, RGB_MOD, _______, _______,          _______,     _______,          _______, _______, _______, _______, _______, _______, \
       _______, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, _______  \
     )
