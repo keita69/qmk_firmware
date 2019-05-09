@@ -28,7 +28,7 @@ enum custom_keycodes {
 #define CTL_7 LCTL(KC_7)           // Crrl+7
 #define CTL_8 LCTL(KC_8)           // Crrl+8
 #define CTL_9 LCTL(KC_9)           // Crrl+9
-#define CTLTAB LCTL(KC_TAB)        // Crrl+Tab
+#define CTL_W LCTL(KC_W)           // Crrl+W
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -59,9 +59,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
      * |  ~   |   !  |   @  |   #  |   $  |   %  |   _  |                    |   +  |   ^  |   &  |   *  |   (  |   )  |  |   |
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-     * | Tab  | CTL1 | CTL2 | CTL3 | CTL4 | CTL5 |  Del |                    | Bksp | Left | Down |  Up  | Right|   :  |  "   |
+     * | Tab  | CTL_1| CTL_2| CTL_3| CTL_4| CTL_5|  Del |                    | Bksp | Left | Down |  Up  | Right|   :  |  "   |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-     * | Shift| CTL6 | CTL7 | CTL8 | CTL9 |CTLTAB|      | Space|      | Enter|      |   N  |   M  |   <  |   >  |   ?  | Shift|
+     * | Shift| CTL_6| CTL_7| CTL_8| CTL_9|CTL_W |      | Space|      | Enter|      |   N  |   M  |   <  |   >  |   ?  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
      * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp|  End |
      * ,----------------------------------------------------------------------------------------------------------------------.
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_LCBR,                        KC_RCBR, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
       KC_TAB,  CTL_1,   CTL_2,   CTL_3,   CTL_4,   CTL_5,   KC_DEL ,                        KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_COLN, KC_DQT , \
-      KC_LSFT, CTL_6,   CTL_7,   CTL_8,   CTL_9,   CTLTAB,           KC_SPC,       KC_ENT ,          KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_RSFT, \
+      KC_LSFT, CTL_6,   CTL_7,   CTL_8,   CTL_9,   CTL_W ,           KC_SPC,       KC_ENT ,          KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_RSFT, \
       KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
     ),
 
