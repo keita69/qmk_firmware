@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   Z  |   X  |   C  |   V  |   B  |      |ClAlDl|      | YMD  |      |   N  |   M  |   ,  |   .  |   /  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp|  End |
+     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_QWERTY] = LAYOUT( \
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_MINS,                        KC_EQL , KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
       KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_DEL ,                        KC_BSPC, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,             CLALDL,       YMD    ,          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_LEFT, KC_DOWN, KC_UP,   KC_RCTL  \
     ),
 
     /* Lower
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift| CTL_6| CTL_7| CTL_8| CTL_9| CTL_W|      | Space|      | Enter|      |CTLSTB|CTLTAB|WWW_BK|WWW_FW|   ?  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp|  End |
+     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_LOWER] = LAYOUT(
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
       KC_TAB,  CTL_1,   CTL_2,   CTL_3,   CTL_4,   CTL_5,   KC_DEL ,                        CTL_W  , KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,  \
       KC_LSFT, CTL_6,   CTL_7,   CTL_8,   CTL_9,   CTL_W ,           KC_SPC,       KC_ENT ,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  KC_QUES, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_RCTL  \
     ),
 
     /* Raise
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   6  |   7  |   8  |   9  |   0  |      | Space|      | Enter|      |CTLSTB|CTLTAB|WWW_BK|WWW_FW|   ?  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp|  End |
+     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| Home |PageDn|PageUp| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_RAISE] = LAYOUT(
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
       KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_DEL ,                        CTL_W,   KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_BTN2, \
       KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,             KC_SPC,       KC_ENT ,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  KC_QUES, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_RCTL  \
     ),
 
     /* Adjust
@@ -105,19 +105,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * |      | Reset|RGB ON|  MODE|  HUE-|  HUE+|      |                    |      |  SAT-|  SAT+|  VAL-|  VAL+|      |      |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-     * |      |      |      |      |      |      |      |                    |      |WhLeft|WhDown| WhUp |WhRght|      |      |
+     * | Tab  |      |      |      |      |      |      |                    |      |WhLeft|WhDown| WhUp |WhRght|      |      |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-     * |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
+     * | Shift|      |      |      |      |      |      |      |      |      |      |      |      |      |      |      | Shift|
      * |-------------+------+------+------+------|      +------+------+------+      |------+------+------+------+-------------|
-     * |      |      |      |      ||||||||      |      |      ||||||||      |      |      ||||||||      |      |      |      |
+     * | Ctrl |      |      |      ||||||||      |      |      ||||||||      |      |      ||||||||      |      |      | Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_ADJUST] = LAYOUT(
       _______, _______, _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______, _______, _______, \
       _______, RESET  , RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, _______,                       _______, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, _______, \
-      _______, _______, BL_TOGG, BL_BRTG, BL_INC , BL_DEC , _______,                       _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, \
-      _______, _______, _______, RGB_MOD, _______, _______,          _______,     _______,          _______, _______, _______, _______, _______, _______, \
-      _______, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, _______  \
+      KC_TAB , _______, BL_TOGG, BL_BRTG, BL_INC , BL_DEC , _______,                       _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, \
+      KC_LSFT, _______, _______, RGB_MOD, _______, _______,          _______,     _______,          _______, _______, _______, _______, _______, KC_RSFT, \
+      KC_LCTL, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, KC_LCTL  \
     )
   };
 
