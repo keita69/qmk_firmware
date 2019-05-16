@@ -2,6 +2,9 @@
 
 extern keymap_config_t keymap_config;
 
+bool is_alt_tab_active = false;
+uint16_t alt_tab_timer = 0;
+
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
@@ -14,6 +17,7 @@ enum custom_keycodes {
   ADJUST,
 
   K8SCTL,
+  ALT_TB,
 };
 
 #define EISU LALT(KC_GRV)
@@ -40,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   Z  |   X  |   C  |   V  |   B  |      |ClAlDl|      |K8SCTL|      |   N  |   M  |   ,  |   .  |   /  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt |ALTTAB|||||||| Lower|      |  Del |||||||| Bksp |      | Raise||||||||GUI_TC|GUI_RT|GUI_UP| Ctrl |
+     * | Ctrl |  GUI |  ALt |ALT_TB|||||||| Lower|      |  Del |||||||| Bksp |      | Raise||||||||GUI_TC|GUI_RT|GUI_UP| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_QWERTY] = LAYOUT( \
@@ -48,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_MINS,                        KC_EQL , KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
       KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_DEL ,                        ALT_F,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,             CLALDL,       K8SCTL ,          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, KC_LALT,          LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            GUI_TC,  GUI_RT,  GUI_UP,  KC_RCTL  \
+      KC_LCTL, KC_LGUI, KC_LALT, ALT_TB,           LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            GUI_TC,  GUI_RT,  GUI_UP,  KC_RCTL  \
     ),
 
     /* Lower
@@ -170,6 +174,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case ALT_TB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        } 
+        alt_tab_timer = timer_read();
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
   }
   return true;
+}
+
+// Super ALT↯TAB
+// https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab
+void matrix_scan_user(void) {
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 1000) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
 }
