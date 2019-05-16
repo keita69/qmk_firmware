@@ -27,6 +27,7 @@ enum custom_keycodes {
 #define GUI_TC LGUI(KC_T)          // Windows+T
 #define GUI_RT LGUI(KC_RGHT)       // Windows+Right
 #define GUI_UP LGUI(KC_UP)         // Windows+Up
+#define ALT_F  LALT(KC_F)          // Alt+F
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
