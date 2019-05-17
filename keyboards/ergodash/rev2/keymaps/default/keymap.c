@@ -194,7 +194,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 1000) {
+    if (timer_elapsed(alt_tab_timer) > 200) {
       unregister_code(KC_LALT);
       is_alt_tab_active = false;
     }
