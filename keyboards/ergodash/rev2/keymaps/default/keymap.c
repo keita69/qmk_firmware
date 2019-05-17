@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   6  |   7  |   8  |   9  |   0  |      | Space|      | Enter|      |CTLSTB|CTLTAB|WWW_BK|WWW_FW|   ?  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise||||||||GUI_TC|GUI_RT|GUI_UP| Ctrl |
+     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| EISU |GUI_RT|GUI_UP| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_LOWER] = LAYOUT(
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
       KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_DEL ,                        CTL_W  , KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,  \
       KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,             KC_SPC,       KC_ENT ,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  KC_QUES, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            GUI_TC,  GUI_RT,  GUI_UP,  KC_RCTL  \
+      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            EISU,    GUI_RT,  GUI_UP,  KC_RCTL  \
     ),
 
     /* Raise
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   6  |   7  |   8  |   9  |   0  |      | Space|      | Enter|      |CTLSTB|CTLTAB|WWW_BK|WWW_FW|   ?  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
-     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise||||||||GUI_TC|GUI_RT|GUI_UP| Ctrl |
+     * | Ctrl |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| EISU |GUI_RT|GUI_UP| Ctrl |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_RAISE] = LAYOUT(
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
       KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_DEL ,                        CTL_W,   KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_BTN2, \
       KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,             KC_SPC,       KC_ENT ,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  KC_QUES, KC_RSFT, \
-      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            GUI_TC,  GUI_RT,  GUI_UP,  KC_RCTL  \
+      KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            EISU,    GUI_RT,  GUI_UP,  KC_RCTL  \
     ),
 
     /* Adjust
@@ -193,7 +193,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 200) {
+    if (timer_elapsed(alt_tab_timer) > 350) {
       unregister_code(KC_LALT);
       is_alt_tab_active = false;
     }
