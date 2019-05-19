@@ -30,6 +30,7 @@ enum custom_keycodes {
 #define GUI_RT LGUI(KC_RGHT)       // Windows+Right
 #define GUI_UP LGUI(KC_UP)         // Windows+Up
 #define ALT_F  LALT(KC_F)          // Alt+F
+#define ESC    KC_ESC              // ESC
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -161,6 +162,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_ADJUST);
       } else {
         layer_off(_ADJUST);
+      }
+      return false;
+      break;
+    case ESC:
+      if (record->event.pressed) {
+        // when keycode ESC is pressed two times 
+        // https://qiita.com/chesscommands/items/ce2883ad0a0c6c27c8de#ss_tap
+        // https://github.com/qmk/qmk_firmware/blob/6590f3c81155f5d5cfb59c5b8a28610d6f3207d0/quantum/send_string_keycodes.h
+        SEND_STRING(SS_TAP(X_ESCAPE));
+        SEND_STRING(SS_TAP(X_ESCAPE));
+      } else {
+        // when keycode ESC is pressed two times 
       }
       return false;
       break;
