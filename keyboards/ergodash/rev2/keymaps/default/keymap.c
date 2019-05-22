@@ -19,8 +19,10 @@ enum custom_keycodes {
   K8SCTL,
   ALT_TB,
   ESCx2,   // ESC x2
-  SD_PRN,  // ( -> ) -> Left (Surround)
   ALT2F,   // Alt -> F
+  SD_CBR,  // Surround {}
+  SD_CRB,  // Surround []
+  SD_PRN,  // Surround ()
 };
 
 #define EISU   LALT(KC_GRV)
@@ -60,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,----------------------------------------------------------------------------------------------------------------------.
      * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |   {  |                    |   }  |  F6  |  F7  |  F8  |  F9  |  F10 |  F12 |
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-     * |  ~   |   !  |   @  |   #  |   $  |   %  |   _  |                    |   +  |   ^  |   &  |   *  |  ()  |   )  |  |   |
+     * |  ~   |   !  |   @  |   #  |   $  |   %  |   _  |                    |   +  |   ^  |  {}  |  []  |  ()  |   )  |  |   |
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
      * | Ctrl |      |      |      | EISU |      |      |                    |      | Left | Down |  Up  | Right| Home | End  |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
@@ -71,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_LOWER] = LAYOUT(
       KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_LCBR,                        KC_RCBR, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
-      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, SD_PRN , KC_RPRN, KC_PIPE, \
+      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, KC_CIRC, SD_CBR , SD_CRB , SD_PRN , KC_RPRN, KC_PIPE, \
       KC_LCTL, _______, _______, _______, EISU,    _______, _______,                        _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,  \
       KC_LSFT, _______, _______, _______, _______, _______,          KC_SPC,       KC_ENT ,          _______, _______, _______, _______, _______, _______, \
       _______, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            EISU,    GUI_RT,  GUI_UP,  _______  \
@@ -166,14 +168,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-     case SD_PRN:
+    case SD_CBR:
       if (record->event.pressed) {
-        // when keycode ( is pressed to surround ()
+        // when keycode this is pressed to surround {}
+        SEND_STRING("{");
+        SEND_STRING("}");
+        SEND_STRING(SS_TAP(X_RIGHT));
+      } else {
+        // when keycode this is pressed
+      }
+      return false;
+      break;
+    case SD_CRB:
+      if (record->event.pressed) {
+        // when keycode this is pressed to surround []
+        SEND_STRING("[");
+        SEND_STRING("]");
+        SEND_STRING(SS_TAP(X_RIGHT));
+      } else {
+        // when keycode this is pressed
+      }
+      return false;
+      break;
+    case SD_PRN:
+      if (record->event.pressed) {
+        // when keycode this is pressed to surround ()
         SEND_STRING("(");
         SEND_STRING(")");
         SEND_STRING(SS_TAP(X_RIGHT));
       } else {
-        // when keycode ESC is pressed two times 
+        // when keycode this is pressed
       }
       return false;
       break;
