@@ -20,9 +20,9 @@ enum custom_keycodes {
   ALT_TB,
 };
 
-#define EISU LALT(KC_GRV)
+#define EISU   LALT(KC_GRV)
 #define CLALDL LCTL(LALT(KC_DEL))  // Crrl+Alt+Del
-#define CTL_W LCTL(KC_W)           // Crrl+W
+#define CTL_W  LCTL(KC_W)          // Crrl+W
 #define CTLTAB LCTL(KC_TAB)        // Crrl+TAB
 #define CTLSTB LCTL(LSFT(KC_TAB))  // Crrl+Shift+TAB
 #define WWW_BK KC_WWW_BACK	       // Browser Back (Windows)
