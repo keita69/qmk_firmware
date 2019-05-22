@@ -18,6 +18,9 @@ enum custom_keycodes {
 
   K8SCTL,
   ALT_TB,
+  ESCx2,   // ESC x2
+  SD_PRN,  // ( -> ) -> Left (Surround)
+  ALT2F,   // Alt -> F
 };
 
 #define EISU   LALT(KC_GRV)
@@ -29,9 +32,6 @@ enum custom_keycodes {
 #define WWW_FW KC_WWW_FORWARD      // Browser Forward (Windows)
 #define GUI_RT LGUI(KC_RGHT)       // Windows+Right
 #define GUI_UP LGUI(KC_UP)         // Windows+Up
-#define ALT2F  KC_RALT             // Alt -> F
-#define ESCx2  KC_ESC              // ESC
-#define SD_PRN KC_LPRN             // ( -> ) -> Left (Surround)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
