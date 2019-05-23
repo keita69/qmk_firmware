@@ -176,7 +176,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode this is pressed to surround {}
         SEND_STRING("{");
         SEND_STRING("}");
-        SEND_STRING(SS_TAP(X_RIGHT));
+        SEND_STRING(SS_TAP(X_LEFT));
       } else {
         // when keycode this is pressed
       }
@@ -187,7 +187,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode this is pressed to surround []
         SEND_STRING("[");
         SEND_STRING("]");
-        SEND_STRING(SS_TAP(X_RIGHT));
+        SEND_STRING(SS_TAP(X_LEFT));
       } else {
         // when keycode this is pressed
       }
@@ -198,7 +198,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode this is pressed to surround ()
         SEND_STRING("(");
         SEND_STRING(")");
-        SEND_STRING(SS_TAP(X_RIGHT));
+        SEND_STRING(SS_TAP(X_LEFT));
       } else {
         // when keycode this is pressed
       }
@@ -209,7 +209,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode this is pressed to surround ""
         SEND_STRING("\"");
         SEND_STRING("\"");
-        SEND_STRING(SS_TAP(X_RIGHT));
+        SEND_STRING(SS_TAP(X_LEFT));
       } else {
         // when keycode this is pressed
       }
@@ -220,7 +220,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode this is pressed to surround ''
         SEND_STRING("'");
         SEND_STRING("'");
-        SEND_STRING(SS_TAP(X_RIGHT));
+        SEND_STRING(SS_TAP(X_LEFT));
       } else {
         // when keycode this is pressed
       }
