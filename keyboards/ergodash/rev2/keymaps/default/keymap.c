@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
      * | Ctrl |      |      |      | EISU |      |      |                    |      | Left | Down |  Up  | Right| Home | End  |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-     * | Shift|      |      |      |      |      |      | Space|      | Enter|      |MsLeft|MsDown| MsUp |MsRght|MsBtn1|MsBtn2|
+     * | Shift|      |      |      |      |      |      | Space|      | Enter|      |      |      |      |      |      |      |
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
      * |      |  GUI |  ALt | EISU |||||||| Lower|      |  Del |||||||| Bksp |      | Raise|||||||| EISU |GUI_RT|GUI_UP|      |
      * ,----------------------------------------------------------------------------------------------------------------------.
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_LCBR,                        KC_RCBR, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS,                        KC_PLUS, SD_GRV3, SD_CBR , SD_CRB , SD_PRN , SD_SCLN, SD_QUOT, \
       KC_LCTL, _______, _______, _______, EISU,    _______, _______,                        _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,  \
-      KC_LSFT, _______, _______, _______, _______, _______,          KC_SPC,       KC_ENT ,          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_BTN2, \
+      KC_LSFT, _______, _______, _______, _______, _______,          KC_SPC,       KC_ENT ,          _______, _______, _______, _______, _______, _______, \
       _______, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            EISU,    GUI_RT,  GUI_UP,  _______  \
     ),
 
