@@ -231,6 +231,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SD_GRV3:
       if (record->event.pressed) {
         // when keycode this is pressed to surround ``````
+        SEND_STRING(SS_TAP(X_ESCAPE)); // 無変換
         SEND_STRING("```");
         SEND_STRING(SS_TAP(X_ENTER));
         SEND_STRING(SS_TAP(X_ENTER));
