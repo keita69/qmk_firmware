@@ -1,9 +1,13 @@
 #include QMK_KEYBOARD_H
+#include <stdio.h>
 
 extern keymap_config_t keymap_config;
 
 bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
+
+uint16_t key_tap_count = 0;
+char key_tap_count_buf[11];
 
 #define _QWERTY 0
 #define _LOWER 1
@@ -24,7 +28,8 @@ enum custom_keycodes {
   SD_PRN,  // Surround ()
   SD_SCLN, // Surround ""
   SD_QUOT, // Surround ''
-  SD_GRV3  // Surround ``````
+  SD_GRV3, // Surround ``````
+  TAP_CNT  // get key tap count
 };
 
 #define EISU   LALT(KC_GRV)
@@ -115,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|      |      |      |      |      |      |      ||||||||      |      |CTLSTB|CTLTAB|WWW_BK|WWW_FW|      |      |
      * |-------------+------+------+------+------|      +------+------+------+      |------+------+------+------+-------------|
-     * |      |      |      |      ||||||||      |      |      ||||||||      |      |      ||||||||      |      |      |      |
+     * |TAPCNT|      |      |      ||||||||      |      |      ||||||||      |      |      ||||||||      |      |      |      |
      * ,----------------------------------------------------------------------------------------------------------------------.
      */
     [_ADJUST] = LAYOUT(
@@ -123,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, RESET  , RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, _______,                       _______, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, _______, \
       KC_LCTL, _______, _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______, _______, _______, \
       KC_LSFT, _______, _______, _______, _______, _______,          _______,     _______,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  _______, _______, \
-      _______, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, _______  \
+      TAP_CNT, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, _______  \
     )
   };
 
@@ -137,6 +142,12 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  if (record->event.pressed) {
+    // tap is twice evnets. events are proessed and release event.
+    key_tap_count++;
+  }
+
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
@@ -257,9 +268,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case K8SCTL:
       if (record->event.pressed) {
         // when keycode K8SCTL is pressed
-       SEND_STRING("kubectl ");
+        SEND_STRING("kubectl ");
       } else {
         // when keycode K8SCTL is pressed
+      }
+      return false;
+      break;
+   case TAP_CNT:
+      if (record->event.pressed) {
+        // when keycode TAP_CNT is pressed
+        SEND_STRING("Your key tap count is ");
+        snprintf(key_tap_count_buf, 11, "%d", key_tap_count);
+        send_string(key_tap_count_buf);
+        SEND_STRING(SS_TAP(X_ENTER));
+      } else {
+        // when keycode TAP_CNT is pressed
       }
       return false;
       break;
@@ -289,3 +312,9 @@ void matrix_scan_user(void) {
     }
   }
 }
+
+// Key Tap Counter
+// char *get_key_tap_count(void) {
+//   snprintf(key_tap_count_buf, 11, "%d", key_tap_count);
+//   return key_tap_count_buf;
+// }
