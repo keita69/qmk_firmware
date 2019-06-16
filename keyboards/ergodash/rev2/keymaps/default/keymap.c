@@ -19,7 +19,6 @@ enum custom_keycodes {
   K8SCTL,
   ALT_TB,
   ESCx2,   // ESC x2
-  ALT2F,   // Alt -> F
   SD_CBR,  // Surround {}
   SD_CRB,  // Surround []
   SD_PRN,  // Surround ()
@@ -39,6 +38,7 @@ enum custom_keycodes {
 #define GUI_UP LGUI(KC_UP)         // Windows+Up
 #define ALTSUP LALT(LSFT(KC_UP))   // ALT+Shift+Up
 #define ALTSDN LALT(LSFT(KC_DOWN)) // ALT+Shift+Down
+#define ALT_SP LALT(KC_SPC)        // ALT+Space
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
      * | Tab  |   Q  |   W  |   E  |   R  |   T  |   -  |                    |   =  |   Y  |   U  |   I  |   O  |   P  |  \   |
      * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-     * | Ctrl |   A  |   S  |   D  |   F  |   G  |  Del |                    | ALT_F|   H  |   J  |   K  |   L  |   ;  |  "   |
+     * | Ctrl |   A  |   S  |   D  |   F  |   G  |  Del |                    |ALT_SP|   H  |   J  |   K  |   L  |   ;  |  "   |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Shift|   Z  |   X  |   C  |   V  |   B  |      |ClAlDl||||||||K8SCTL|      |   N  |   M  |   ,  |   .  |   /  | Shift|
      * |-------------+------+------+------+------| Space|------+------+------+ Enter|------+------+------+------+-------------|
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
       ESCx2,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,                        KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,  \
       KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_MINS,                        KC_EQL , KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
-      KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_DEL ,                        ALT2F,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+      KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_DEL ,                        ALT_SP,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,             CLALDL,       K8SCTL ,          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
       KC_LCTL, KC_LGUI, KC_LALT, ALT_TB,           LOWER,   KC_SPC , KC_DEL,       KC_BSPC, KC_ENT , RAISE,            KC_RGUI, GUI_RT,  GUI_UP,  KC_ENT   \
     ),
@@ -254,17 +254,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case ALT2F:
-      if (record->event.pressed) {
-        // when keycode ALT -> F is pressed
-        SEND_STRING(SS_TAP(X_RALT));
-        SEND_STRING(SS_TAP(X_F));
-      } else {
-        // released
-      }
-      return false;
-      break;
-    case K8SCTL:
+   case K8SCTL:
       if (record->event.pressed) {
         // when keycode K8SCTL is pressed
        SEND_STRING("kubectl ");
