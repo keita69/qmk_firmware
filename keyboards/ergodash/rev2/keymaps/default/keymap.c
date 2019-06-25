@@ -301,7 +301,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
    case KC_BSPC:
-      is_count_active = true;
       if (record->event.pressed) {
         // when keycode BS is pressed
         del_tap_counter();
