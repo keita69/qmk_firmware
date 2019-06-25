@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include <print.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -129,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,----------------------------------------------------------------------------------------------------------------------.
      * |      |      |      |      |      |      |      |                    |      |      |      |      |      |      |      |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-     * |      | Reset|RGB ON|  MODE|  HUE-|  HUE+|      |                    |      |  SAT-|  SAT+|  VAL-|  VAL+|      |      |
+     * |Debug | Reset|RGB ON|  MODE|  HUE-|  HUE+|      |                    |      |  SAT-|  SAT+|  VAL-|  VAL+|      |      |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
      * | Ctrl |      |      |      |      |      |      |                    |      |      |      |      |      |      |      |
      * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
@@ -140,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_ADJUST] = LAYOUT(
       _______, _______, _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______, _______, _______, \
-      _______, RESET  , RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, _______,                       _______, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, _______, \
+      DEBUG  , RESET  , RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, _______,                       _______, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, _______, \
       KC_LCTL, _______, _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______, _______, _______, \
       KC_LSFT, _______, _______, _______, _______, _______,          _______,     _______,          CTLSTB,  CTLTAB,  WWW_BK,  WWW_FW,  _______, _______, \
       TAP_CNT, _______, _______, _______,          _______, _______, _______,     _______, _______, _______,          _______, _______, _______, _______  \
@@ -157,6 +158,10 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+// If console is enabled, it will print the matrix position and status of each key pressed
+#ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
+#endif 
 
   if (record->event.pressed) {
     // tap is twice evnets. events are proessed and release event.
@@ -314,19 +319,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case TAP_CNT:
       if (record->event.pressed) {
         // when keycode TAP_CNT is pressed
-        SEND_STRING("key tap count : ");
+        SEND_STRING("total tap : ");
         memset(key_tap_count_buf, 0, sizeof(key_tap_count_buf));
         snprintf(key_tap_count_buf, 11, "%d ", key_tap_count);
         send_string(key_tap_count_buf);
 
-        // SEND_STRING("Del(BS) key count : ");
-        // memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
-        // snprintf(del_tap_count_buf, 11, "%d ", del_tap_count);
-        // send_string(del_tap_count_buf);
+        SEND_STRING("[del/BS ");
+        memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
+        snprintf(del_tap_count_buf, 11, "%d ", del_tap_count);
+        send_string(del_tap_count_buf);
 
-        // memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
-        // snprintf(del_tap_count_buf, 6, "%d%% ", (del_tap_count / key_tap_count) * 100);
-        // send_string(del_tap_count_buf);
+        memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
+        snprintf(del_tap_count_buf, 11, "(%d%%)]", 100 * del_tap_count / key_tap_count);
+        send_string(del_tap_count_buf);
 
         SEND_STRING(SS_TAP(X_ENTER));
       } else {
@@ -359,4 +364,14 @@ void matrix_scan_user(void) {
       is_alt_tab_active = false;
     }
   }
+}
+
+// Debug
+// https://docs.qmk.fm/#/newbs_testing_debugging?id=debugging
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  //debug_enable=true;
+  //debug_matrix=true;
+  //debug_keyboard=true;
+  //debug_mouse=true;
 }
