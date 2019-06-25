@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include <stdio.h>
+#include <string.h>
 
 extern keymap_config_t keymap_config;
 
@@ -8,6 +9,20 @@ uint16_t alt_tab_timer = 0;
 
 uint16_t key_tap_count = 0;
 char key_tap_count_buf[11];
+
+bool is_del_tab_active = false;
+uint16_t del_tap_count = 0;
+char del_tap_count_buf[11];
+
+// Key Tap Counter
+void key_tap_counter(void) {
+  key_tap_count++;
+}
+
+// Del Tap Counter
+void del_tap_counter(void) {
+  del_tap_count++;
+}
 
 #define _QWERTY 0
 #define _LOWER 1
@@ -145,7 +160,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
     // tap is twice evnets. events are proessed and release event.
-    key_tap_count++;
+    key_tap_counter();
   }
 
   switch (keycode) {
@@ -274,15 +289,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+   case KC_DEL:
+      if (record->event.pressed) {
+        // when keycode DEL is pressed
+        del_tap_counter();
+        SEND_STRING(SS_DOWN(X_DELETE));
+      } else {
+        // when keycode DEL is released
+        SEND_STRING(SS_UP(X_DELETE));
+      }
+      return false;
+      break;
+   case KC_BSPC:
+      is_count_active = true;
+      if (record->event.pressed) {
+        // when keycode BS is pressed
+        del_tap_counter();
+        SEND_STRING(SS_DOWN(X_BSPACE));
+      } else {
+        // when keycode BS is released
+        SEND_STRING(SS_UP(X_BSPACE));
+      }
+      return false;
+      break;
    case TAP_CNT:
       if (record->event.pressed) {
         // when keycode TAP_CNT is pressed
-        SEND_STRING("Your key tap count is ");
-        snprintf(key_tap_count_buf, 11, "%d", key_tap_count);
+        SEND_STRING("key tap count : ");
+        memset(key_tap_count_buf, 0, sizeof(key_tap_count_buf));
+        snprintf(key_tap_count_buf, 11, "%d ", key_tap_count);
         send_string(key_tap_count_buf);
+
+        // SEND_STRING("Del(BS) key count : ");
+        // memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
+        // snprintf(del_tap_count_buf, 11, "%d ", del_tap_count);
+        // send_string(del_tap_count_buf);
+
+        // memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
+        // snprintf(del_tap_count_buf, 6, "%d%% ", (del_tap_count / key_tap_count) * 100);
+        // send_string(del_tap_count_buf);
+
         SEND_STRING(SS_TAP(X_ENTER));
       } else {
-        // when keycode TAP_CNT is pressed
+        // when keycode TAP_CNT is released
       }
       return false;
       break;
@@ -312,9 +361,3 @@ void matrix_scan_user(void) {
     }
   }
 }
-
-// Key Tap Counter
-// char *get_key_tap_count(void) {
-//   snprintf(key_tap_count_buf, 11, "%d", key_tap_count);
-//   return key_tap_count_buf;
-// }
