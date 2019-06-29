@@ -330,7 +330,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         send_string(del_tap_count_buf);
 
         memset(del_tap_count_buf, 0, sizeof(del_tap_count_buf));
-        snprintf(del_tap_count_buf, 11, "(%d%%)]", 100 * del_tap_count / key_tap_count);
+        snprintf(del_tap_count_buf, 11, "(%d%%)]", (100 * del_tap_count) / key_tap_count);
         send_string(del_tap_count_buf);
 
         SEND_STRING(SS_TAP(X_ENTER));
